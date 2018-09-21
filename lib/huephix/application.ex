@@ -10,7 +10,7 @@ defmodule Huephix.Application do
     children = [
       # # Starts the bridges agent
       supervisor(Huephix.Bridges, []),
-      # # Start the Boot sequence for the Hue bridge stuff
+      # Start the Boot sequence for the Hue bridge stuff, configuration etc.
       worker(Huephix.BootSeq, [], restart: :temporary),
       # Start the Ecto repository
       supervisor(Huephix.Repo, []),

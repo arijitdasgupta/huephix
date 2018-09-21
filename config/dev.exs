@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :huephix, HuephixWeb.Endpoint,
-  http: [port: 4000],
+  http: [port: 8080],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -56,7 +56,3 @@ config :huephix, Huephix.Repo,
   database: "huephix_dev",
   hostname: "localhost",
   pool_size: 10
-
-# Hue specific configurations
-config :huephix, userConfigFile: "usernames.txt",
-  applicationName: "huephix"

@@ -4,7 +4,7 @@ defmodule Huephix.Bridges do
     alias Huephix.UserConfigFile
 
     def start_link do
-        Logger.info "#{__MODULE__} Agent starting}"
+        Logger.info "#{__MODULE__} Agent starting"
         Agent.start_link(fn -> %{bridges: nil} end, name: __MODULE__)
     end
 

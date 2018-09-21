@@ -14,15 +14,20 @@ defmodule HuephixWeb.Router do
   end
 
   scope "/", HuephixWeb do
-    resources "/api/v1/lights", LightsController
-
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", HuephixWeb do
-  #   pipe_through :api
-  # end
+  scope "/api/v1", HuephixWeb do
+    resources "/lights", LightsController, singleton: true do
+      post "/on", LightsController, :on, as: :on
+      post "/off", LightsController, :off, as: :off
+      post "/brightness", LightsController, :brightness, as: :brightness
+      post "/blink", LightsController, :blink, as: :blink
+      post "/scene", LightsController, :scene, as: :scene
+      post "/loop/start", LightsController, :loop_start, as: :loop_start
+      post "/loop/stop", LightsController, :loop_stop, as: :loop_stop
+    end
+  end
 end
