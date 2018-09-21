@@ -2,7 +2,7 @@
 
 ## Fix your Philips Hue...
 
-An application that adds features to your existing Philips Hue system, and has easy to use webhooks for all your IFTTT integration needs, and can ping other webhooks too.
+An application that adds features to your existing Philips Hue system, and has easy to use webhooks for all your [IFTTT](https://ifttt.com/discover) integration needs, and can ping other webhooks too.
 
 To start your server:
   * Run `docker-compose start` or `docker-compose up` to start/run a PostgresDB as a Docker container, if you aren't alreay running one.
