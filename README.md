@@ -1,6 +1,6 @@
 # Huephix
 
-## Fix your Philips Hue setup...
+## Fix your Philips Hue...
 
 An application that adds features to your existing Philips Hue system, and has easy to use webhooks for all your IFTTT integration needs, and can ping other webhooks too.
 
