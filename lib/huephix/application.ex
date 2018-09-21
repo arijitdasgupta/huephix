@@ -8,7 +8,7 @@ defmodule Huephix.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      # # Starts the bridges agent
+      # Starts the bridges agent
       supervisor(Huephix.Bridges, []),
       # Start the Boot sequence for the Hue bridge stuff, configuration etc.
       worker(Huephix.BootSeq, [], restart: :temporary),
