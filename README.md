@@ -4,8 +4,8 @@
 
 An application that adds features to your existing Philips Hue system, and has easy to use webhooks for all your IFTTT integration needs, and can ping other webhooks too.
 
-To start your Phoenix server:
-
+To start your server:
+  * Run `docker-compose start` or `docker-compose up` to start/run a PostgresDB as a Docker container, if you aren't alreay running one.
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
   * Install Node.js dependencies with `cd assets && npm install`
