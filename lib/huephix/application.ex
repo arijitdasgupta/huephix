@@ -9,9 +9,9 @@ defmodule Huephix.Application do
     # Define workers and child supervisors to be supervised
     children = [
       # # Starts the bridges agent
-      worker(Huephix.Bridges, []),
+      supervisor(Huephix.Bridges, []),
       # # Start the Boot sequence for the Hue bridge stuff
-      worker(Huephix.BootSeq, []),
+      worker(Huephix.BootSeq, [], restart: :temporary),
       # Start the Ecto repository
       supervisor(Huephix.Repo, []),
       # Start the endpoint when the application starts
