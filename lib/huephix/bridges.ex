@@ -3,11 +3,9 @@ defmodule Huephix.Bridges do
     alias Huephix.HueWrapper
     alias Huephix.UserConfigFile
 
-    def start do
-        {:ok, bridgesAgent} = Agent.start_link(fn -> %{bridges: nil} end, name: __MODULE__)
-        Logger.info "#{__MODULE__} Agent started #{inspect(bridgesAgent)}"
-
-        bridgesAgent
+    def start_link do
+        Logger.info "#{__MODULE__} Agent starting}"
+        Agent.start_link(fn -> %{bridges: nil} end, name: __MODULE__)
     end
 
     def set_bridges(newBridges) do

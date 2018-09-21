@@ -1,4 +1,4 @@
-defmodule Huephix.Boot do
+defmodule Huephix.Application do
   use Application
 
   # See https://hexdocs.pm/elixir/Application.html
@@ -9,9 +9,9 @@ defmodule Huephix.Boot do
     # Define workers and child supervisors to be supervised
     children = [
       # # Starts the bridges agent
-      # worker(Huephix.Bridges, []),
+      worker(Huephix.Bridges, []),
       # # Start the Boot sequence for the Hue bridge stuff
-      # supervisor(Huephix.BootupSequence, []),
+      worker(Huephix.BootSeq, []),
       # Start the Ecto repository
       supervisor(Huephix.Repo, []),
       # Start the endpoint when the application starts
