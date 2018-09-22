@@ -1,14 +1,13 @@
 defmodule Huephix.BootSeq do
     alias Huephix.Bridges
-    alias Huephix.UserConfigFile
+    alias Huephix.UserConfig
 
     defp boot_sequence do
-        validBridges = Bridges.try_connecting_to_bridges |> Bridges.get_valid_bridges
+        bridges = Bridges.try_connecting_to_bridges
 
-        case validBridges do
+        case bridges do
             [_ | _] -> 
-                :ok = UserConfigFile.write_bridges(validBridges)
-                Bridges.set_bridges(validBridges)   
+                Bridges.set_bridges(bridges)
             [] ->
                 raise "No valid bridges found" 
         end

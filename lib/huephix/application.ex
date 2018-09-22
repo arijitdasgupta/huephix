@@ -8,12 +8,12 @@ defmodule Huephix.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
+      # Start the Ecto repository
+      supervisor(Huephix.Repo, []),
       # Starts the bridges agent
       supervisor(Huephix.Bridges, []),
       # Start the Boot sequence for the Hue bridge stuff, configuration etc.
       worker(Huephix.BootSeq, [], restart: :temporary),
-      # Start the Ecto repository
-      supervisor(Huephix.Repo, []),
       # Start the endpoint when the application starts
       supervisor(HuephixWeb.Endpoint, []),
       # Start your own worker by calling: Huephix.Worker.start_link(arg1, arg2, arg3)

@@ -1,7 +1,7 @@
 defmodule Huephix.Bridges do
     require Logger
     alias Huephix.HueWrapper
-    alias Huephix.UserConfigFile
+    alias Huephix.UserConfig
 
     def start_link do
         Logger.info "#{__MODULE__} Agent starting"
@@ -25,16 +25,15 @@ defmodule Huephix.Bridges do
     end
 
     def try_connecting_to_bridges() do
-        case UserConfigFile.read_hue_users_file() do
-            {:ok, content} -> 
-                UserConfigFile.read_userdata(content) |> 
-                Enum.map(&(HueWrapper.hueconnect(&1[:ip], &1[:username])))
+        bridgedOkTuple = case UserConfig.read_user_data do
+            {:ok, bridges} -> Enum.map(
+                bridges,
+                &(HueWrapper.hueconnect(&1.ip, &1.user))
+            )
             {:error, _} -> HueWrapper.find_and_connect_all()
         end
-    end
 
-    def get_valid_bridges(bridgesOk) do
-        bridgesOk |> Enum.filter(fn(bridge) -> 
+        bridgedOkTuple |> Enum.filter(fn(bridge) -> 
             case bridge do
                 {:ok, _} -> true
                 {:error, _} -> false

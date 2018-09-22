@@ -1,7 +1,9 @@
 defmodule Huephix.HueWrapper do
     require Logger
 
-    @application_name Application.get_env(:huesilon, :applicationName)
+    import Huephix.Utils.Hue, only: :functions
+
+    @application_name Application.get_env(:huesilon, :hueApplicationName)
 
     defp connect(ip, username) do
         Huex.connect(ip, username)
@@ -9,13 +11,6 @@ defmodule Huephix.HueWrapper do
 
     defp connect(ip) do
         Huex.connect(ip) |> Huex.authorize(@application_name)
-    end
-
-    defp map_to_ok_err(bridge) do
-        case bridge.status do
-            :error -> {:error, bridge}
-            _ -> {:ok, bridge}
-        end
     end
 
     def find_and_connect_all do

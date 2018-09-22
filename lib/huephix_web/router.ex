@@ -30,6 +30,7 @@ defmodule HuephixWeb.Router do
       post "/loop/stop", LightsController, :loop_stop, as: :loop_stop
     end
 
-    resources "/alert", AlertController, singleton: true
+    post "/alert", AlertController, :alert, as: :alert
+    post "/pair", PairingController, :pair, as: :pair
   end
 end

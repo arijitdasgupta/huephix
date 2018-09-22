@@ -23,8 +23,7 @@ config :logger, :console,
   metadata: [:user_id]
 
 # Hue specific configurations
-config :huephix, userConfigFile: "usernames.txt",
-  applicationName: "huephix"
+config :huephix, hueApplicationName: "huephix"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
