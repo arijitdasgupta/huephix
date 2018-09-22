@@ -3,11 +3,11 @@ defmodule Huephix.BootSeq do
     alias Huephix.UserConfig
 
     defp boot_sequence do
-        bridges = Bridges.try_connecting_to_bridges
+        bridges = Bridges.try_connecting_to_bridges(UserConfig.read_user_data)
 
         case bridges do
-            [_ | _] -> 
-                Bridges.set_bridges(bridges)
+            [_ | _] ->
+                Bridges.add_bridges(bridges)
             [] ->
                 raise "No valid bridges found" 
         end

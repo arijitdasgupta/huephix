@@ -5,13 +5,14 @@ defmodule Huephix.Bridges do
 
     def start_link do
         Logger.info "#{__MODULE__} Agent starting"
-        Agent.start_link(fn -> %{bridges: nil} end, name: __MODULE__)
+        Agent.start_link(fn -> %{bridges: []} end, name: __MODULE__)
     end
 
-    def set_bridges(newBridges) do
-        Logger.info "#{__MODULE__} Agent set to #{inspect(newBridges)}"
-        Agent.update(__MODULE__, fn(_) -> 
-            %{bridges: newBridges}
+    def add_bridges(newBridges) do
+        Logger.info "#{__MODULE__} Agent adding #{inspect(newBridges)}"
+        Agent.update(__MODULE__, fn(d) -> 
+            bridges = d.bridges ++ newBridges
+            %{bridges: bridges}
         end)
     end
 
@@ -24,16 +25,8 @@ defmodule Huephix.Bridges do
         end)
     end
 
-    def try_connecting_to_bridges() do
-        bridgedOkTuple = case UserConfig.read_user_data do
-            {:ok, bridges} -> Enum.map(
-                bridges,
-                &(HueWrapper.hueconnect(&1.ip, &1.user))
-            )
-            {:error, _} -> HueWrapper.find_and_connect_all()
-        end
-
-        bridgedOkTuple |> Enum.filter(fn(bridge) -> 
+    def filter_and_map_to_bridges(bridgesOkTuple) do
+        bridgesOkTuple |> Enum.filter(fn(bridge) -> 
             case bridge do
                 {:ok, _} -> true
                 {:error, _} -> false
@@ -42,5 +35,17 @@ defmodule Huephix.Bridges do
             {:ok, bridge} = bridge
             bridge
         end)
+    end
+
+    def try_connecting_to_bridges(user_data) do
+        bridgedOkTuple = case user_data do
+            {:ok, bridges} -> Enum.map(
+                bridges,
+                &(HueWrapper.hueconnect(&1.ip, &1.user))
+            )
+            {:error, _} -> HueWrapper.find_and_connect_all()
+        end
+
+        filter_and_map_to_bridges(bridgedOkTuple)
     end
 end

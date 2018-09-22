@@ -8,9 +8,9 @@ defmodule Huephix.UserConfig do
         }
     end
 
-    def write_user_data(bridges) do
+    def update_user_data(bridges) do
         bridges
             |> Enum.map(&(%HueBridge{ip: &1.host, user: &1.username}))
-            |> Enum.each(&(Repo.insert_or_update(&1)))
+            |> Enum.each(&(Repo.insert(&1))) # Update existing stuff TODO
     end
 end
