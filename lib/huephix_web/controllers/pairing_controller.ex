@@ -5,7 +5,7 @@ defmodule HuephixWeb.PairingController do
     alias Huephix.UserConfig
     alias Huephix.Bridges
 
-    def show(conn, _params) do
+    def index(conn, _params) do
         {:ok, bridges} = UserConfig.read_user_data
         connected_bridges = Bridges.get_bridges
 

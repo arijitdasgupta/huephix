@@ -6,6 +6,7 @@ defmodule HuephixWeb.PairingView do
             connected_bridges: connected_bridges_data
         }) do
         bridges = Enum.map(bridges_data, &(%{
+            id: &1.id,
             ip: &1.ip,
             user: &1.user
         }))
@@ -16,7 +17,7 @@ defmodule HuephixWeb.PairingView do
         }))
 
         %{
-            status: "OK", 
+            status: "OK",
             bridges: bridges,
             connected_bridges: connected_bridges
         }

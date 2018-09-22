@@ -30,12 +30,16 @@ defmodule HuephixWeb.Router do
       post "/loop/stop", LightsController, :loop_stop, as: :loop_stop
     end
 
-    get "/bridges", PairingController, :show, as: :show
+    # Pairing details
+    get "/bridges-all", PairingController, :index, as: :index
     post "/pair", PairingController, :pair, as: :pair
     post "/pair/purge", PairingController, :purge, as: :purge
 
+    # Alert controller
     post "/alert", AlertController, :alert, as: :alert
 
+    # Proper resources
     resources "/sequences", SequencesController
+    resources "/bridges", BridgesController
   end
 end
