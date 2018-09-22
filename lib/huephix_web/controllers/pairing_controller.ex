@@ -7,8 +7,12 @@ defmodule HuephixWeb.PairingController do
 
     def show(conn, _params) do
         {:ok, bridges} = UserConfig.read_user_data
+        connected_bridges = Bridges.get_bridges
 
-        render conn, "index.json", %{bridges: bridges}
+        render conn, "index.json", %{
+            bridges: bridges,
+            connected_bridges: connected_bridges
+        }
     end
 
     def pair(conn, _params) do
