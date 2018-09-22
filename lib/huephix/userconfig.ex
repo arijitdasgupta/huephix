@@ -10,7 +10,7 @@ defmodule Huephix.UserConfig do
 
     def update_user_data(bridges) do
         bridges
-            |> Enum.map(&(%HueBridge{ip: &1.host, user: &1.username}))
+            |> Enum.map(&(HueBridge.changeset(%HueBridge{}, %{ip: &1.host, user: &1.username})))
             |> Enum.map(&(Repo.insert(&1)))
     end
 

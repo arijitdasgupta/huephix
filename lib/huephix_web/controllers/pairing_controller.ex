@@ -5,6 +5,12 @@ defmodule HuephixWeb.PairingController do
     alias Huephix.UserConfig
     alias Huephix.Bridges
 
+    def show(conn, _params) do
+        {:ok, bridges} = UserConfig.read_user_data
+
+        render conn, "index.json", %{bridges: bridges}
+    end
+
     def pair(conn, _params) do
         bridges = HueWrapper.find_and_connect_all
             |> Bridges.filter_and_map_to_valid_bridges
@@ -16,12 +22,12 @@ defmodule HuephixWeb.PairingController do
             _ -> nil
         end
 
-        render conn, "index.json"
+        render conn, "ok.json"
     end
 
     def purge(conn, _params) do
         UserConfig.delete_user_data
 
-        render conn, "index.json"
+        render conn, "ok.json"
     end
 end
