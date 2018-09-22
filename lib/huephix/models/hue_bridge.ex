@@ -14,5 +14,6 @@ defmodule Huephix.HueBridge do
     hue_bridge
     |> cast(attrs, [:ip, :user])
     |> validate_required([:ip, :user])
+    |> unique_constraint(:ip)
   end
 end

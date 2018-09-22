@@ -3,13 +3,14 @@ defmodule Huephix.HueWrapper do
 
     import Huephix.Utils.Hue, only: :functions
 
-    @application_name Application.get_env(:huesilon, :hueApplicationName)
+    @application_name Application.get_env(:huephix, :hueApplicationName)
 
     defp connect(ip, username) do
         Huex.connect(ip, username)
     end
 
     defp connect(ip) do
+        IO.inspect(@application_name)
         Huex.connect(ip) |> Huex.authorize(@application_name)
     end
 

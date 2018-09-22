@@ -25,7 +25,7 @@ defmodule Huephix.Bridges do
         end)
     end
 
-    def filter_and_map_to_bridges(bridgesOkTuple) do
+    def filter_and_map_to_valid_bridges(bridgesOkTuple) do
         bridgesOkTuple |> Enum.filter(fn(bridge) -> 
             case bridge do
                 {:ok, _} -> true
@@ -46,6 +46,6 @@ defmodule Huephix.Bridges do
             {:error, _} -> HueWrapper.find_and_connect_all()
         end
 
-        filter_and_map_to_bridges(bridgedOkTuple)
+        filter_and_map_to_valid_bridges(bridgedOkTuple)
     end
 end
