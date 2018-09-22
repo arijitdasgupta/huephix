@@ -4,7 +4,7 @@ defmodule HuephixWeb.BridgesController do
     alias Huephix.Bridges
     alias Huephix.{Repo, HueBridge}
 
-    defp is_in_connected_bridges(bridge) do
+    defp in_connected_bridges?(bridge) do
         case Enum.find(Bridges.get_bridges(), fn connected_bridge ->
             bridge.ip === connected_bridge.host
         end) do
@@ -35,7 +35,7 @@ defmodule HuephixWeb.BridgesController do
             {bridge_id, _} -> 
                 case Repo.get(HueBridge, bridge_id) do
                     nil -> conn_404 |> render("404.json", data: nil)
-                    bridge -> case is_in_connected_bridges(bridge) do
+                    bridge -> case in_connected_bridges?(bridge) do
                         nil -> conn_404 |> render("404.json", data: nil)
                         bridge -> render conn, "bridge.json", data: bridge
                     end
