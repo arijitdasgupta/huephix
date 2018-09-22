@@ -7,7 +7,7 @@ defmodule HuephixWeb.AlertController do
     def alert(conn, _params) do
         Task.start(fn -> blink(@number_of_alert_blinks) end)
 
-        render conn, "index.json"
+        render conn, "ok.json"
     end
   end
   

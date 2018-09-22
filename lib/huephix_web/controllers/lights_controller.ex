@@ -16,7 +16,7 @@ defmodule HuephixWeb.LightsController do
             HueWrapper.set_brightness(bridge, brightness)
         end)
 
-        render conn, "index.json"
+        render conn, "ok.json"
     end
 
     def on(conn, _params) do
@@ -24,13 +24,13 @@ defmodule HuephixWeb.LightsController do
             HueWrapper.turn_on_lights(bridge)
         end)
 
-        render conn, "index.json"
+        render conn, "ok.json"
     end
 
     def blink(conn, _params) do
         blink()
 
-        render conn, "index.json"
+        render conn, "ok.json"
     end
 
     def loop_start(conn, _params) do
@@ -38,7 +38,7 @@ defmodule HuephixWeb.LightsController do
             HueWrapper.start_loop(bridge)
         end)
 
-        render conn, "index.json"
+        render conn, "ok.json"
     end
 
     def loop_stop(conn, _params) do
@@ -46,7 +46,7 @@ defmodule HuephixWeb.LightsController do
             HueWrapper.stop_loop(bridge)
         end)
 
-        render conn, "index.json"
+        render conn, "ok.json"
     end
 
     def scene(conn, _params) do
@@ -56,7 +56,7 @@ defmodule HuephixWeb.LightsController do
             HueWrapper.set_scene(bridge, body)
         end)
 
-        render conn, "index.json"
+        render conn, "ok.json"
     end
 
     def off(conn, _params) do
@@ -64,7 +64,7 @@ defmodule HuephixWeb.LightsController do
             HueWrapper.turn_off_lights(bridge)
         end)
 
-        render conn, "index.json"
+        render conn, "ok.json"
     end
   end
   
