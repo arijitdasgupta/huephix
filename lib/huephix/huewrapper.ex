@@ -3,7 +3,7 @@ defmodule Huephix.HueWrapper do
 
     import Huephix.Utils.Hue, only: :functions
 
-    @application_name Application.get_env(:huephix, :hueApplicationName)
+    @application_name Application.get_env(:huephix, :hue_application_name)
 
     defp connect(ip, username) do
         Huex.connect(ip, username)

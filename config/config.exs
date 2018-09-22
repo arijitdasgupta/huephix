@@ -23,7 +23,8 @@ config :logger, :console,
   metadata: [:user_id]
 
 # Hue specific configurations
-config :huephix, hueApplicationName: "huephix"
+config :huephix, hue_application_name: "huephix",
+  number_of_alert_blinks: 3
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

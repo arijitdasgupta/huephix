@@ -1,7 +1,6 @@
 defmodule Huephix.Bridges do
     require Logger
     alias Huephix.HueWrapper
-    alias Huephix.UserConfig
 
     def start_link do
         Logger.info "#{__MODULE__} Agent starting"
