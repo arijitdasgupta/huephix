@@ -11,7 +11,7 @@ defmodule Huephix.UserConfig do
     def update_user_data(bridges) do
         bridges
             |> Enum.map(&(%HueBridge{ip: &1.host, user: &1.username}))
-            |> Enum.map(&(Repo.insert_or_update(&1))) # TODO: Might break with the update
+            |> Enum.map(&(Repo.insert(&1)))
     end
 
     def delete_user_data do

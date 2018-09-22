@@ -2,7 +2,6 @@ defmodule HuephixWeb.LightsController do
     use HuephixWeb, :controller
 
     alias Huephix.HueWrapper
-    alias Huephix.Bridges
 
     import Huephix.Utils.Lights, only: :functions
 

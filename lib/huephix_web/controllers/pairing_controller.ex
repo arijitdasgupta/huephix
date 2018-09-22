@@ -21,5 +21,7 @@ defmodule HuephixWeb.PairingController do
 
     def purge(conn, _params) do
         UserConfig.delete_user_data
+
+        render conn, "index.json"
     end
 end
