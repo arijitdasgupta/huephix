@@ -1,9 +1,9 @@
 defmodule Huephix.Utils.PStore do
     require Logger
 
-    def start do
+    def start_link do
         Logger.info "PStore Agent starting"
-        Agent.start(fn -> %{pids: []} end)
+        Agent.start_link(fn -> %{pids: []} end)
     end
 
     def add_pid(agent_pid, pid_to_add) do

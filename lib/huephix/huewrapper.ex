@@ -10,7 +10,7 @@ defmodule Huephix.HueWrapper do
     def start_link do
         Logger.info("#{__MODULE__} Agent starting")
         Agent.start_link(fn -> 
-            {:ok, pid} = PStore.start()
+            {:ok, pid} = PStore.start_link()
             %{loop_store_pid: pid}
         end, name: __MODULE__)
     end
