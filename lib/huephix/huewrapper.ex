@@ -101,7 +101,7 @@ defmodule Huephix.HueWrapper do
     def start_loop(bridge) do
         lights = get_all_light_ids(bridge)
 
-        spawn(fn -> operate_on_lights_with_delay(bridge, lights,
+        Task.start(fn -> operate_on_lights_with_delay(bridge, lights,
             fn (light_id) -> 
                 Huex.set_state(bridge, light_id, %{
                     "effect": "colorloop"
