@@ -3,7 +3,17 @@ defmodule Huephix.HueWrapper do
 
     import Huephix.Utils.Hue, only: :functions
 
+    alias Huephix.Utils.PStore
+
     @application_name Application.get_env(:huephix, :hue_application_name)
+
+    def start_link do
+        Logger.info("#{__MODULE__} Agent starting")
+        Agent.start_link(fn -> 
+            {:ok, pid} = PStore.start()
+            %{loop_store_pid: pid}
+        end, name: __MODULE__)
+    end
 
     defp connect(ip, username) do
         Huex.connect(ip, username)
@@ -56,6 +66,24 @@ defmodule Huephix.HueWrapper do
         funk.(bridge, 0)
     end
 
+    defp add_to_the_loop_store(loop_pid) do
+        # Adding the new loops pid to the loop store
+        Agent.get(__MODULE__, fn %{loop_store_pid: loop_store_pid} -> 
+            PStore.add_pid(loop_store_pid, loop_pid)
+        end)
+    end
+
+    defp kill_all_loops_in_loop_store do
+       # Purging the existing loop processes
+        Agent.get(__MODULE__, fn %{loop_store_pid: loop_store_pid} -> 
+            loop_task_pids = PStore.get_pids(loop_store_pid)
+            Enum.each(loop_task_pids, fn task_pid -> 
+                Process.exit(task_pid, :kill)
+            end) # Looping and killing all the process that was there for the loop
+            PStore.purge_pids(loop_store_pid) # Clearning the pids
+        end) 
+    end
+
     defp operate_on_lights_with_delay(bridge, lights, funk) do
         [ light_id | lights ] = lights
         funk.(light_id)
@@ -101,16 +129,21 @@ defmodule Huephix.HueWrapper do
     def start_loop(bridge) do
         lights = get_all_light_ids(bridge)
 
-        Task.start(fn -> operate_on_lights_with_delay(bridge, lights,
+        {:ok, loop_pid} = Task.start(fn -> operate_on_lights_with_delay(bridge, lights,
             fn (light_id) -> 
                 Huex.set_state(bridge, light_id, %{
                     "effect": "colorloop"
                 })
             end)
         end)
+
+        add_to_the_loop_store(loop_pid)
     end
 
     def stop_loop(bridge) do
+        kill_all_loops_in_loop_store()
+
+        # Operating on lights
         operate_all_lights(bridge, &(Huex.set_group_state(&1, &2, %{
             "effect": "none"
         })))

@@ -12,6 +12,8 @@ defmodule Huephix.Application do
       supervisor(Huephix.Repo, []),
       # Starts the bridges agent
       supervisor(Huephix.Bridges, []),
+      # Starts the HueWrapper agent
+      supervisor(Huephix.HueWrapper, []),
       # Start the Boot sequence for the Hue bridge stuff, configuration etc.
       worker(Huephix.BootSeq, [], restart: :temporary),
       # Start the endpoint when the application starts
