@@ -10,7 +10,6 @@ defmodule Huephix.HueWrapper do
     end
 
     defp connect(ip) do
-        IO.inspect(@application_name)
         Huex.connect(ip) |> Huex.authorize(@application_name)
     end
 

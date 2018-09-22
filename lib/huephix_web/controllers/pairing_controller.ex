@@ -9,10 +9,8 @@ defmodule HuephixWeb.PairingController do
         bridges = HueWrapper.find_and_connect_all
             |> Bridges.filter_and_map_to_valid_bridges
         
-        IO.inspect(bridges)
         case bridges do
             [_ | _] -> 
-                IO.inspect UserConfig.update_user_data(bridges)
                 Bridges.add_bridges(bridges)
             _ -> nil
         end
