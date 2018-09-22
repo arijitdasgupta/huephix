@@ -31,7 +31,7 @@ defmodule HuephixWeb.Router do
     end
 
     post "/alert", AlertController, :alert, as: :alert
-    post "/bridges", PairingController, :show, as: :show
+    get "/bridges", PairingController, :show, as: :show
     post "/pair", PairingController, :pair, as: :pair
     post "/pair/purge", PairingController, :purge, as: :purge
   end
