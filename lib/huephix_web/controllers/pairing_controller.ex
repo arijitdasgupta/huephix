@@ -11,10 +11,15 @@ defmodule HuephixWeb.PairingController do
         
         case bridges do
             [_ | _] -> 
+                UserConfig.update_user_data(bridges)
                 Bridges.add_bridges(bridges)
             _ -> nil
         end
 
         render conn, "index.json"
+    end
+
+    def purge(conn, _params) do
+        UserConfig.delete_user_data
     end
 end

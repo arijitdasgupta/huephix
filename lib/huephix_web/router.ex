@@ -32,5 +32,6 @@ defmodule HuephixWeb.Router do
 
     post "/alert", AlertController, :alert, as: :alert
     post "/pair", PairingController, :pair, as: :pair
+    post "/pair/purge", PairingController, :purge, as: :purge
   end
 end
