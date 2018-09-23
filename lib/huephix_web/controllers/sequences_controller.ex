@@ -1,6 +1,7 @@
 defmodule HuephixWeb.SequencesController do
     use HuephixWeb, :controller
     alias Huephix.{Repo, Sequence}
+    alias HuephixWeb.SharedView.CommonView
     alias HuephixWeb.ErrorView
 
     def index(conn, _params) do
@@ -44,7 +45,7 @@ defmodule HuephixWeb.SequencesController do
             {sequence_id, _} = Integer.parse(params["id"])
             existing_sequence = Repo.get!(Sequence, sequence_id)
             Repo.delete(existing_sequence)
-            render conn, ErrorView, "ok.json"
+            render conn, CommonView, "ok.json"
         rescue
             _ in MatchError ->
                 conn |> put_status(400) |> render(ErrorView, "400.json")
