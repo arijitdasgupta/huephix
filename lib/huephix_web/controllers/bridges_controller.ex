@@ -3,6 +3,7 @@ defmodule HuephixWeb.BridgesController do
 
     alias Huephix.Bridges
     alias Huephix.{Repo, HueBridge}
+    alias HuephixWeb.SharedView.CommonView
 
     defp in_connected_bridges?(bridge) do
         case Enum.find(Bridges.get_bridges(), fn connected_bridge ->
@@ -34,13 +35,13 @@ defmodule HuephixWeb.BridgesController do
         case Integer.parse(params["id"]) do
             {bridge_id, _} -> 
                 case Repo.get(HueBridge, bridge_id) do
-                    nil -> conn_404 |> render("404.json", data: nil)
+                    nil -> conn_404 |> render(CommonView, "404.json")
                     bridge -> case in_connected_bridges?(bridge) do
-                        nil -> conn_404 |> render("404.json", data: nil)
-                        bridge -> render conn, "bridge.json", data: bridge
+                        nil -> conn_404 |> render(CommonView, "404.json")
+                        bridge -> render(conn, "bridge.json", data: bridge)
                     end
                 end
-            :error -> conn_400 |> render("400.json", data: nil)
+            :error -> conn_400 |> render(CommonView, "400.json")
         end
     end
 end

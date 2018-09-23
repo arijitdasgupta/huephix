@@ -22,8 +22,4 @@ defmodule HuephixWeb.PairingView do
             connected_bridges: connected_bridges
         }
     end
-
-    def render("ok.json", _) do
-        %{status: "OK"}
-    end
 end

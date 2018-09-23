@@ -2,6 +2,7 @@ defmodule HuephixWeb.LightsController do
     use HuephixWeb, :controller
 
     alias Huephix.HueWrapper
+    alias HuephixWeb.SharedView.CommonView
 
     import Huephix.Utils.Lights, only: :functions
 
@@ -16,7 +17,7 @@ defmodule HuephixWeb.LightsController do
             HueWrapper.set_brightness(bridge, brightness)
         end)
 
-        render conn, "ok.json"
+        render conn, CommonView, "ok.json"
     end
 
     def on(conn, _params) do
@@ -24,7 +25,7 @@ defmodule HuephixWeb.LightsController do
             HueWrapper.turn_on_lights(bridge)
         end)
 
-        render conn, "ok.json"
+        render conn, CommonView, "ok.json"
     end
 
     def blink(conn, _params) do
@@ -38,7 +39,7 @@ defmodule HuephixWeb.LightsController do
             HueWrapper.start_loop(bridge)
         end)
 
-        render conn, "ok.json"
+        render conn, CommonView, "ok.json"
     end
 
     def loop_stop(conn, _params) do
@@ -46,7 +47,7 @@ defmodule HuephixWeb.LightsController do
             HueWrapper.stop_loop(bridge)
         end)
 
-        render conn, "ok.json"
+        render conn, CommonView, "ok.json"
     end
 
     def scene(conn, _params) do
@@ -56,7 +57,7 @@ defmodule HuephixWeb.LightsController do
             HueWrapper.set_scene(bridge, body)
         end)
 
-        render conn, "ok.json"
+        render conn, CommonView, "ok.json"
     end
 
     def off(conn, _params) do
@@ -64,7 +65,7 @@ defmodule HuephixWeb.LightsController do
             HueWrapper.turn_off_lights(bridge)
         end)
 
-        render conn, "ok.json"
+        render conn, CommonView, "ok.json"
     end
   end
   

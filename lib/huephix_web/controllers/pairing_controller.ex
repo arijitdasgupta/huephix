@@ -4,6 +4,7 @@ defmodule HuephixWeb.PairingController do
     alias Huephix.HueWrapper
     alias Huephix.UserConfig
     alias Huephix.Bridges
+    alias HuephixWeb.SharedView.CommonView
 
     def index(conn, _params) do
         {:ok, bridges} = UserConfig.read_user_data
@@ -26,12 +27,12 @@ defmodule HuephixWeb.PairingController do
             _ -> nil
         end
 
-        render conn, "ok.json"
+        render(conn, CommonView, "ok.json")
     end
 
     def purge(conn, _params) do
         UserConfig.delete_user_data
 
-        render conn, "ok.json"
+        render(conn, CommonView, "ok.json")
     end
 end

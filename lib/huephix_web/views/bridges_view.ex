@@ -17,12 +17,4 @@ defmodule HuephixWeb.BridgesView do
             user: bridge.user
         }
     end
-
-    def render("404.json", %{data: nil}) do
-        %{error: "Bridge not found"}
-    end
-
-    def render("400.json", %{data: nil}) do
-        %{error: "Bad parameter"}
-    end
 end
