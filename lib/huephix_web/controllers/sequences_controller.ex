@@ -21,7 +21,7 @@ defmodule HuephixWeb.SequencesController do
         end
     end
 
-    def create(conn, params) do
+    def create(conn, params) do        
         {:ok, new_sequence} = Repo.insert(Sequence.changeset(%Sequence{}, params))
         render conn, "show.json", data: new_sequence
     end
@@ -30,8 +30,8 @@ defmodule HuephixWeb.SequencesController do
         try do
             {sequence_id, _} = Integer.parse(params["id"])
             existing_sequence = Repo.get!(Sequence, sequence_id)
-            Repo.update(Sequence.changeset(existing_sequence, params))
-            render conn, ErrorView, "ok.json"
+            {:ok, seq} = Repo.update(Sequence.changeset(existing_sequence, params))
+            render conn, "show.json", data: seq
         rescue
             _ in MatchError ->
                 conn |> put_status(400) |> render(ErrorView, "400.json")

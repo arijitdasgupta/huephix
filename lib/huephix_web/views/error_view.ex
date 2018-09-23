@@ -11,6 +11,10 @@ defmodule HuephixWeb.ErrorView do
   # the template name. For example, "404.html" becomes
   # "Not Found".
 
+  def render("500.json", _) do
+    %{error: "Something went wrong"}
+  end
+
   def render("404.json", _) do
     %{error: "Not found"}
   end
