@@ -10,7 +10,6 @@ defmodule Huephix.Utils.Sequences do
             |> Enum.filter(fn bridge -> 
                 bridge["sequence"] |> Enum.each(
                     fn seq -> 
-                        IO.inspect(seq)
                         case seq do
                             # Validate {scene, time} structure
                             %{"scene" => scene, "time" => time} ->  
