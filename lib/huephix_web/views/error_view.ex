@@ -1,5 +1,6 @@
 defmodule HuephixWeb.ErrorView do
   use HuephixWeb, :view
+  alias HuephixWeb.ErrorHelpers
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
@@ -10,6 +11,10 @@ defmodule HuephixWeb.ErrorView do
   # By default, Phoenix returns the status message from
   # the template name. For example, "404.html" becomes
   # "Not Found".
+
+  def render("409.validation.json", %{changeset: changeset}) do
+    %{errors: Ecto.Changeset.traverse_errors(changeset, &ErrorHelpers.translate_error/1)}
+  end
 
   def render("500.json", _) do
     %{error: "Something went wrong"}

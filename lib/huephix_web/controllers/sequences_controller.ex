@@ -21,9 +21,11 @@ defmodule HuephixWeb.SequencesController do
         end
     end
 
-    def create(conn, params) do        
-        {:ok, new_sequence} = Repo.insert(Sequence.changeset(%Sequence{}, params))
-        render conn, "show.json", data: new_sequence
+    def create(conn, params) do
+        case Repo.insert(Sequence.changeset(%Sequence{}, params)) do
+            {:ok, new_sequence} -> render conn, "show.json", data: new_sequence
+            {:error, changeset} -> render conn, ErrorView, "409.validation.json", changeset: changeset
+        end
     end
 
     def update(conn, params) do

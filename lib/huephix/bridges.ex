@@ -24,6 +24,12 @@ defmodule Huephix.Bridges do
         end)
     end
 
+    def get_bridge_by_host(host) do
+        Agent.get(__MODULE__, fn d -> 
+            Enum.find(d.bridges, &(&1.host === host))
+        end)
+    end
+
     def filter_and_map_to_valid_bridges(bridgesOkTuple) do
         bridgesOkTuple |> Enum.filter(fn(bridge) -> 
             case bridge do
