@@ -14,9 +14,10 @@ defmodule Huephix.Sequence do
 
   def validate_from_bridges(changeset) do
     data = fetch_field(changeset, :data)
+    {:changes, sequence_data} = data
     try do
-      Sequences.validate_bridge_sequence_data!(data)
-      changeset
+      Sequences.validate_bridge_sequence_data!(sequence_data)
+      change(changeset, data: Sequences.get_uniq_bridges_from_sequence_data(sequence_data))
     rescue
       _ in _ -> add_error(changeset, :bridges, "Invalid bridges data")
     end
