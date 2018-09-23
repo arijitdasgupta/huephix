@@ -1,7 +1,6 @@
 defmodule HuephixWeb.SequencesController do
     use HuephixWeb, :controller
     alias Huephix.{Repo, Sequence}
-    alias HuephixWeb.SharedView.ErrorView
     alias HuephixWeb.ErrorView
 
     def index(conn, _params) do
