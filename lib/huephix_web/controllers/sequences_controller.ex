@@ -10,13 +10,13 @@ defmodule HuephixWeb.SequencesController do
     def show(conn, params) do
         try do
             {sequence_id, _} = Integer.parse(params["id"])
-            case Repo.get(Sequence, sequence_id) do
-                nil -> conn |> put_status(404) |> render(CommonView, "404.json")
-                seq -> conn |> render("show.json", data: seq)
-            end
+            seq = Repo.get!(Sequence, sequence_id)
+            render(conn, "show.json", data: seq)
         rescue
             e in MatchError -> 
                 conn |> put_status(400) |> render(CommonView, "400.json")
+            e in Ecto.NoResultsError ->
+                conn |> put_status(404) |> render(CommonView, "404.json")
         end
     end
 
