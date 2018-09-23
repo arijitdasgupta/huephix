@@ -27,7 +27,7 @@ defmodule Huephix.Utils.Sequences do
             end)
     end
 
-    def get_uniq_bridges_from_sequence_data(sequence_data) do
+    def change_to_uniq_bridges_from_sequence_data(sequence_data) do
         %{"bridges" => bridges} = sequence_data
         %{"bridges" => Enum.uniq_by(bridges, &(&1["host"]))}
     end
