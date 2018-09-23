@@ -31,7 +31,7 @@ defmodule HuephixWeb.LightsController do
     def blink(conn, _params) do
         blink()
 
-        render conn, "ok.json"
+        render conn, CommonView, "ok.json"
     end
 
     def loop_start(conn, _params) do
