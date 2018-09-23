@@ -42,6 +42,7 @@ defmodule Huephix.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix, "~> 1.3.4"},
+      {:poison, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
     ]
   end
