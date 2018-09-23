@@ -55,4 +55,8 @@ defmodule HuephixWeb.SequencesController do
                 conn |> put_status(404) |> render(ErrorView, "404.json")
         end
     end
+
+    def activate(conn, _params) do
+        render conn, CommonView, "ok.json"
+    end
 end
