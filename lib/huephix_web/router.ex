@@ -41,5 +41,6 @@ defmodule HuephixWeb.Router do
     # Proper resources
     resources "/sequences", SequencesController
     resources "/bridges", BridgesController
+    resources "/scenes", ScenesController
   end
 end
