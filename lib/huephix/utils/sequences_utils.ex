@@ -10,10 +10,20 @@ defmodule Huephix.Utils.Sequences do
             |> Enum.filter(fn bridge -> 
                 bridge["sequence"] |> Enum.each(
                     fn seq -> 
-                        %{"scene" => scene, "time" => time} = seq
-                        case is_integer(time) and is_bitstring(scene) do
-                            false -> raise :error
-                            true -> nil
+                        IO.inspect(seq)
+                        case seq do
+                            # Validate {scene, time} structure
+                            %{"scene" => scene, "time" => time} ->  
+                                case is_integer(time) and is_bitstring(scene) do
+                                    false -> raise :error
+                                    true -> nil
+                                end
+                            # Vaidate {stop, time} structure
+                            %{"stop" => true, "time" => time} -> 
+                                case is_integer(time) do
+                                    false -> raise :error
+                                    true -> nil
+                                end
                         end
                     end
                 )

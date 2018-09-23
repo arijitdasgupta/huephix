@@ -7,6 +7,7 @@ defmodule Huephix.Sequence do
   schema "sequences" do
     field :data, :map
     field :name, :string
+    field :loop, :boolean
 
     timestamps()
   end
@@ -24,8 +25,8 @@ defmodule Huephix.Sequence do
   @doc false
   def changeset(sequence, attrs) do
     sequence
-    |> cast(attrs, [:name, :data])
-    |> validate_required([:name, :data])
+    |> cast(attrs, [:name, :loop, :data])
+    |> validate_required([:name, :loop, :data])
     |> validate_from_bridges()
   end
 end
