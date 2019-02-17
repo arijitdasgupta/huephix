@@ -35,7 +35,7 @@ defmodule Huephix.Mixfile do
     [
       {:cowboy, "~> 1.0"},
       {:gettext, "~> 0.11"},
-      {:huex, git: "https://github.com/arijitdasgupta/huex.git", tag: "master"},
+      {:huex, git: "https://github.com/arijitdasgupta/huex.git", tag: "v0.10.0-alpha1"},
       {:nerves_ssdp_client, "~> 0.1"},
       {:phoenix_ecto, "~> 3.2"},
       {:phoenix_html, "~> 2.10"},

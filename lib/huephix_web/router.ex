@@ -26,7 +26,6 @@ defmodule HuephixWeb.Router do
       post "/brightness", LightsController, :brightness, as: :brightness
       post "/blink", LightsController, :blink, as: :blink
       post "/scene", LightsController, :scene, as: :scene
-      post "/sequence/:id", SequencesController, :activate, as: :activate
       post "/loop/start", LightsController, :loop_start, as: :loop_start
       post "/loop/stop", LightsController, :loop_stop, as: :loop_stop
     end
@@ -39,8 +38,7 @@ defmodule HuephixWeb.Router do
     # Alert controller
     post "/alert", AlertController, :alert, as: :alert
 
-    # Proper resources
-    resources "/sequences", SequencesController
+    # Other resources
     resources "/bridges", BridgesController
     resources "/scenes", ScenesController
   end
